@@ -19,7 +19,8 @@
     "dev": "rollup -c --watch",
     "build": "rollup -c",
     "prepublishOnly": "pnpm build",
-    "pretest": "pnpm build"
+    "pretest": "pnpm build",
+    "format": "cargo fmt --all"
   },
   "keywords": [
     "ecosystem:tauri",
