@@ -1,0 +1,48 @@
+{
+  "name": "tauri-plugin-app-events-api",
+  "version": "0.1.0",
+  "author": "wtto00 <wtto00@outlook.com>",
+  "description": "A plugin for tauri@v2 to listen some events on iOS and Android.",
+  "type": "module",
+  "types": "./dist-js/index.d.ts",
+  "main": "./dist-js/index.cjs",
+  "module": "./dist-js/index.js",
+  "exports": {
+    "types": "./dist-js/index.d.ts",
+    "import": "./dist-js/index.js",
+    "require": "./dist-js/index.cjs"
+  },
+  "files": [
+    "dist-js"
+  ],
+  "scripts": {
+    "dev": "rollup -c --watch",
+    "build": "rollup -c",
+    "prepublishOnly": "pnpm build",
+    "pretest": "pnpm build"
+  },
+  "keywords": [
+    "ecosystem:tauri",
+    "tauri-plugin",
+    "app-events"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wtto00/tauri-plugin-app-events.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wtto00/tauri-plugin-app-events/issues"
+  },
+  "homepage": "https://github.com/wtto00/tauri-plugin-app-events#readme",
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.6",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@9.12.2"
+}
