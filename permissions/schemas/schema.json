@@ -305,7 +305,7 @@
           "const": "deny-registerListener"
         },
         {
-          "description": "Default permissions for the plugin",
+          "description": "Default permissions for the plugin `app-events`",
           "type": "string",
           "const": "default"
         }

@@ -46,18 +46,18 @@ Install the `app-events` plugin to get started.
    pnpm add tauri-plugin-app-events-api@0.1
    ```
 
-1. Modify `src-tauri/capabilities/default.json` to Allow the frontend to execute the exit_app command.
+1. Modify `src-tauri/capabilities/mobile.json` to Allow the frontend to execute the `registerListener` command.
 
    ```diff
     {
-      "$schema": "../gen/schemas/desktop-schema.json",
-      "identifier": "default",
+      "$schema": "../gen/schemas/mobile-schema.json",
+      "identifier": "mobile",
       "description": "Capability for the main window",
       "windows": ["main"],
       "permissions": [
-        "core:default",
    +    "app-events:default"
-      ]
+      ],
+      "platforms": ["android", "iOS"]
     }
    ```
 
