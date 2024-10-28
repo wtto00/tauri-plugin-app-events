@@ -40,19 +40,13 @@ Install the `app-events` plugin to get started.
     }
    ```
 
-1. Install the JavaScript Guest bindings using your preferred JavaScript package manager:
-
-   ```shell
-   pnpm add tauri-plugin-app-events-api@0.1
-   ```
-
 1. Modify `src-tauri/capabilities/mobile.json` to Allow the frontend to execute the `registerListener` command.
 
    ```diff
     {
       "$schema": "../gen/schemas/mobile-schema.json",
       "identifier": "mobile",
-      "description": "Capability for the main window",
+      "description": "Capability for the main window on mobile platform",
       "windows": ["main"],
       "permissions": [
    +    "app-events:default"
@@ -61,7 +55,7 @@ Install the `app-events` plugin to get started.
     }
    ```
 
-1. If you want to support key event listeners on the Android platform, you'll need to modify the `MainActivity.kt` file located at `src-tauri/gen/android/app/src/main/java/com/tauri/dev/MainActivity.kt. The content should be updated as follows`:
+1. If you want to support key event listeners on the Android platform, you'll need to modify the `MainActivity.kt` file located at `src-tauri/gen/android/app/src/main/java/com/tauri/dev/MainActivity.kt`. The content should be updated as follows:
 
    ```kotlin
    package com.tauri.dev
@@ -104,6 +98,12 @@ Install the `app-events` plugin to get started.
        return true
      }
    }
+   ```
+
+1. Install the JavaScript Guest bindings using your preferred JavaScript package manager:
+
+   ```shell
+   pnpm add tauri-plugin-app-events-api@0.1
    ```
 
 ## Usage
