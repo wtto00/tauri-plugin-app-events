@@ -16,5 +16,7 @@ node_modules/
 dist-js
 dist
 
-*.xcodeproj/
+project.xcworkspace/
+xcuserdata/
+xcshareddata/
 DerivedData/
