@@ -21,7 +21,7 @@ Install the `app-events` plugin to get started.
 1. Run the following command in the `src-tauri` folder to add the plugin to the project’s dependencies in `Cargo.toml`:
 
    ```shell
-   cargo add tauri-plugin-app-events@0.1 --target 'cfg(any(target_os = "android", target_os = "ios"))'
+   cargo add tauri-plugin-app-events@0.2 --target 'cfg(any(target_os = "android", target_os = "ios"))'
    ```
 
 1. Modify `lib.rs` to initialize the plugin:
@@ -32,7 +32,7 @@ Install the `app-events` plugin to get started.
         tauri::Builder::default()
             .setup(|app| {
    +            #[cfg(mobile)]
-   +            let _ = app.handle().plugin(tauri_plugin_app_events::init());
+   +            app.handle().plugin(tauri_plugin_app_events::init())?;
                 Ok(())
             })
             .run(tauri::generate_context!())
@@ -103,7 +103,7 @@ Install the `app-events` plugin to get started.
 1. Install the JavaScript Guest bindings using your preferred JavaScript package manager:
 
    ```shell
-   pnpm add tauri-plugin-app-events-api@0.1
+   pnpm add tauri-plugin-app-events-api@0.2
    ```
 
 ## Usage
@@ -154,6 +154,41 @@ onResume(() => {
 });
 ```
 
+### Calling in Rust
+
+```rust
+tauri::Builder::default()
+    .invoke_handler(tauri::generate_handler![greet])
+    .setup(|app| {
+        #[cfg(mobile)]
+        {
+            let app_handle = app.handle();
+            app_handle.plugin(tauri_plugin_app_events::init())?;
+            let app_cloned = app_handle.clone();
+            app_handle
+                .app_events()
+                .set_resume_handler(Channel::new(move |_| {
+                    // The app has returned to the foreground.
+                    app_cloned.emit("js-log", "set_resume_handler")?;
+                    Ok(())
+                }))?;
+            let app_cloned = app_handle.clone();
+            app_handle
+                .app_events()
+                .set_pause_handler(Channel::new(move |_| {
+                    // The app has switched to the background.
+                    app_cloned.emit("js-log", "set_pause_handler")?;
+                    Ok(())
+                }))?;
+        }
+        Ok(())
+    })
+    .run(tauri::generate_context!())
+    .expect("error while running tauri application");
+```
+
+> Note that executing `println!("some log")` in the handler callback in Rust will have no effect.
+
 ### onPause
 
 The `pause` event fires when the system puts the application into the background, typically when the user switches to a different application.
@@ -163,6 +198,8 @@ onResume(() => {
   console.log("App pause");
 });
 ```
+
+In `Rust`, refer to the instructions mentioned above in `onResume`.
 
 ### onBackKeyDown
 

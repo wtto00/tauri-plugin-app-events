@@ -1,6 +1,6 @@
 {
   "productName": "tauri-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "identifier": "com.tauri.dev",
   "build": {
     "beforeDevCommand": "pnpm dev",
@@ -32,6 +32,9 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "iOS": {
+      "developmentTeam": "tato wang (G4GF3SN6QT)"
+    }
   }
 }

@@ -9,8 +9,13 @@ import {
 	onVolumeDownKeyDown,
 	onVolumeUpKeyDown,
 } from "tauri-plugin-app-events-api";
+import { listen } from "@tauri-apps/api/event";
 
 let response = "";
+
+listen("js-log", (event) => {
+	response += `log from Rust: ${event.payload}<br>`;
+});
 
 function updateResponse(returnValue) {
 	response += `[${new Date().toLocaleTimeString()}] ${typeof returnValue === "string" ? returnValue : JSON.stringify(returnValue)}<br>`;
@@ -25,7 +30,7 @@ function clearAll() {
 	onSearchKeyDown();
 	onVolumeDownKeyDown();
 	onVolumeUpKeyDown();
-  response = ''
+	response = "";
 	hasListened = false;
 }
 

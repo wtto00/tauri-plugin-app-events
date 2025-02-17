@@ -1,8 +1,11 @@
 use serde::de::DeserializeOwned;
 use tauri::{
+    ipc::Channel,
     plugin::{PluginApi, PluginHandle},
     AppHandle, Runtime,
 };
+
+use crate::models::EventHandler;
 
 #[cfg(target_os = "ios")]
 tauri::ios_plugin_binding!(init_plugin_app_events);
@@ -22,3 +25,17 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
 
 /// Access to the app-events APIs.
 pub struct AppEvents<R: Runtime>(PluginHandle<R>);
+
+impl<R: Runtime> AppEvents<R> {
+    pub fn set_resume_handler(&self, handler: Channel) -> crate::Result<()> {
+        self.0
+            .run_mobile_plugin("setResumeHandler", EventHandler { handler })
+            .map_err(Into::into)
+    }
+
+    pub fn set_pause_handler(&self, handler: Channel) -> crate::Result<()> {
+        self.0
+            .run_mobile_plugin("setPauseHandler", EventHandler { handler })
+            .map_err(Into::into)
+    }
+}
