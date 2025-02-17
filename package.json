@@ -1,6 +1,6 @@
 {
   "name": "tauri-plugin-app-events-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "wtto00 <wtto00@outlook.com>",
   "description": "A plugin for tauri@v2 to listen some events on iOS and Android.",
   "type": "module",

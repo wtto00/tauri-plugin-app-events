@@ -8,6 +8,9 @@ use tauri::{
 mod mobile;
 
 #[cfg(mobile)]
+mod models;
+
+#[cfg(mobile)]
 mod error;
 
 #[cfg(mobile)]

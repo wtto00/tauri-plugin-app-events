@@ -12,6 +12,7 @@ settingGroups:
     base:
       PRODUCT_NAME: tauri-app
       PRODUCT_BUNDLE_IDENTIFIER: com.tauri.dev
+      DEVELOPMENT_TEAM: tato wang (G4GF3SN6QT)
 targetTemplates:
   app:
     type: application
