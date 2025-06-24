@@ -194,7 +194,7 @@ tauri::Builder::default()
 The `pause` event fires when the system puts the application into the background, typically when the user switches to a different application.
 
 ```js
-onResume(() => {
+onPause(() => {
   console.log("App pause");
 });
 ```
