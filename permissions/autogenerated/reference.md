@@ -2,6 +2,8 @@
 
 Default permissions for the plugin `app-events`
 
+#### This default permission set includes the following:
+
 - `allow-registerListener`
 
 ## Permission Table
